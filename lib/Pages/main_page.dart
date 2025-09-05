@@ -4,8 +4,8 @@ import 'package:reins/Widgets/chat_app_bar.dart';
 import 'package:reins/Widgets/chat_drawer.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class ReinsMainPage extends StatelessWidget {
-  const ReinsMainPage({super.key});
+class MindWorksMainPage extends StatelessWidget {
+  const MindWorksMainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +16,13 @@ class ReinsMainPage extends StatelessWidget {
         drawer: ChatDrawer(),
       );
     } else {
-      return _ReinsLargeMainPage();
+      return _MindWorksLargeMainPage();
     }
   }
 }
 
-class _ReinsLargeMainPage extends StatelessWidget {
-  const _ReinsLargeMainPage({super.key});
+class _MindWorksLargeMainPage extends StatelessWidget {
+  const _MindWorksLargeMainPage({super.key});
 
   @override
   Widget build(BuildContext context) {

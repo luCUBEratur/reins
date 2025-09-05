@@ -5,8 +5,10 @@ import 'package:reins/Models/settings_route_arguments.dart';
 import 'package:reins/Pages/main_page.dart';
 import 'package:reins/Pages/settings_page/settings_page.dart';
 import 'package:reins/Providers/chat_provider.dart';
+import 'package:reins/Providers/agent_provider.dart';
 import 'package:reins/Services/database_service.dart';
 import 'package:reins/Services/ollama_service.dart';
+import 'package:reins/Services/mindworks_service.dart';
 import 'package:reins/Utils/material_color_adapter.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -48,8 +50,10 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        Provider(create: (_) => MindWorksService()),
         Provider(create: (_) => OllamaService()),
         Provider(create: (_) => DatabaseService()),
+        ChangeNotifierProvider(create: (_) => AgentProvider()),
         ChangeNotifierProvider(
           create: (context) => ChatProvider(
             ollamaService: context.read(),
@@ -57,13 +61,13 @@ void main() async {
           ),
         ),
       ],
-      child: const ReinsApp(),
+      child: const MindWorksApp(),
     ),
   );
 }
 
-class ReinsApp extends StatelessWidget {
-  const ReinsApp({super.key});
+class MindWorksApp extends StatelessWidget {
+  const MindWorksApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +99,7 @@ class ReinsApp extends StatelessWidget {
           onGenerateRoute: (settings) {
             if (settings.name == '/') {
               return MaterialPageRoute(
-                builder: (context) => const ReinsMainPage(),
+                builder: (context) => const MindWorksMainPage(),
               );
             }
 
