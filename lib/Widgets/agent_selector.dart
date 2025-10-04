@@ -11,10 +11,13 @@ class AgentSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<AgentProvider>();
+    final options = <String>{...agents, provider.selectedAgent}.toList();
+    options.remove(provider.selectedAgent);
+    options.insert(0, provider.selectedAgent);
     return DropdownButton<String>(
       value: provider.selectedAgent,
       items: [
-        for (final agent in agents)
+        for (final agent in options)
           DropdownMenuItem(value: agent, child: Text(agent)),
       ],
       onChanged: (value) {

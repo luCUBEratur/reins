@@ -4,10 +4,8 @@ import 'package:reins/Constants/constants.dart';
 import 'package:reins/Models/settings_route_arguments.dart';
 import 'package:reins/Pages/main_page.dart';
 import 'package:reins/Pages/settings_page/settings_page.dart';
-import 'package:reins/Providers/chat_provider.dart';
 import 'package:reins/Providers/agent_provider.dart';
-import 'package:reins/Services/database_service.dart';
-import 'package:reins/Services/ollama_service.dart';
+import 'package:reins/Providers/mindworks_chat_provider.dart';
 import 'package:reins/Services/mindworks_service.dart';
 import 'package:reins/Utils/material_color_adapter.dart';
 import 'package:provider/provider.dart';
@@ -51,13 +49,11 @@ void main() async {
     MultiProvider(
       providers: [
         Provider(create: (_) => MindWorksService()),
-        Provider(create: (_) => OllamaService()),
-        Provider(create: (_) => DatabaseService()),
         ChangeNotifierProvider(create: (_) => AgentProvider()),
         ChangeNotifierProvider(
-          create: (context) => ChatProvider(
-            ollamaService: context.read(),
-            databaseService: context.read(),
+          create: (context) => MindWorksChatProvider(
+            service: context.read<MindWorksService>(),
+            agentProvider: context.read<AgentProvider>(),
           ),
         ),
       ],
